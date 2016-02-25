@@ -1,0 +1,65 @@
+DAO
+    HotelDao - методы поиска отелей по адресным данным:
+    возвращают список отелей: association-имя поля ассоциироанного объекта в HotelAddressEntity, в настоящее время
+    принимает значения "state", "city", "county", name - значение данного объекта (в Entity называется "name")
+        (1)     public List<HotelEntity>searchByAddressAssociation(String association, String name);
+        (2)     public List<HotelEntity> searchByAddressAssociation(String association, String name, int begin, int count);
+    Возвращает длину списка получаемого в методе (1)
+        (3)     public Integer lengthSearchByAddressAssociation(String association, String name);
+    возвращают список отелей по критерию (УЛИЦА) ---> HotelAddressEntity.address LIKE "%"+name+"%"
+        (4)     public List<HotelEntity> searchLikeAddress(String name);
+        (5)     public List<HotelEntity> searchLikeAddress(String name, int begin, int count);
+        Возвращает длину списка получаемого в методе (4)
+        (6)     public Integer lengthSearchLikeAddress(String name);
+**********************************************************************************************************************
+пересмотреть сам критерий поиска- возможно из-за него притормаживает
+для "address", "city", "county" поиск переделан по критерию LIKE "% "+name+"%" and LIKE name+"%"
+**********************************************************************************************************************
+СДЕЛАНО: правильно обработать отключение кнопки send  во время обработки ajax
+*****************************
+для смены locale  <p><a href="?language==en">EN</a><a href="?language==ru">RU</a></p>
+***********************************************************************************************************************
+доделать регистрацию ордера
+доделать вывод результатов и навигацию like booking.com
+дополнить тесты dao
+***********************************************************************************************************************
+WARNING не удалось создать spring:message address.City  - возможно непривильно обрабатывается '.C'-> spring
+при вводе использовалась автоподстановка- тоесть ошибиться при вводе не мог
+*****************************************
+SecurityContextHolder.getContext().setAuthentication();
+**********************************************************************************************************************
+redirect:/profile  при клике на свой ник - для всх павторизированных пользователей
+redirect:/profile/id используется для просмотра профиля другого пользователя - assert only admin
+(возможно в профиль по id добавить кнопку показ заказов данного пользователя)
+**********************************************************************************************************************
+В сервисы добавил удаление ордера с проверкой: don't delete confirmed order -> throw new ServiceException()
+**********************************************************************************************************************
+тестовый sql  для выбора свободных комнат
+select * from (select * from room where room.size=1 and room.hotel_id=269) as r left join
+(SELECT * FROM room_order o where hotel_id=269 and not((o.start_date<'2014-12-10' and o.end_date<'2014-12-10')
+or (o.start_date>'2014-12-11' and o.end_date>'2014-12-11'))) as t on r.id=t.room_id where t.id is null;
+***********************************************************************************************************************
+HQL-ины
+/*        hql ="FROM RoomEntity R WHERE R.hotel=:hotel AND R.size=:sizze AND R.category=:category";
+        query.setParameter("startDate", order.getStartDate());
+        query.setParameter("endDate", order.getEndDate());
+        query.setParameter("sizze", order.getPlaces());
+        query.setParameter("category", order.getRoomCategory());
+        query.setParameter("hotel", order.getHotel());
+        System.out.println("TEST "+ query.list());*/
+
+/*        String hql =" SELECT R FROM RoomEntity R WHERE R.hotel=:hotel";
+        Query query=getSession().createQuery(hql);
+        query.setParameter("hotel", order.getHotel());
+        List<RoomEntity> allRooms=query.list();
+        LOG.info("[FIND allRooms BY QUERY size="+order.getPlaces()+" hotelId="+order.getHotel().getId()+" category="+order.getRoomCategory()+"]="+allRooms);
+
+        hql ="SELECT O.room FROM OrderEntity O WHERE O.hotel=:hotel AND NOT " +
+                "((O.startDate<:startDate AND O.endDate<:startDate) OR (O.startDate>:endDate AND O.endDate>:endDate))";
+        query=getSession().createQuery(hql);
+        query.setParameter("startDate", order.getStartDate());
+        query.setParameter("endDate", order.getEndDate());
+        query.setParameter("hotel", order.getHotel());
+        List<RoomEntity> excludeRooms=query.list();
+        LOG.info("[FIND excludeRooms BY QUERY startDate="+order.getStartDate()+" endDate"+order.getEndDate()+"]="+excludeRooms);
+        allRooms.removeAll(excludeRooms);*/

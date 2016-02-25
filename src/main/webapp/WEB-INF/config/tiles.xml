@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="base.definition" template="/WEB-INF/layouts/layout.jsp">
+        <put-attribute name="tile" value=""/>
+        <put-attribute name="header" value="/WEB-INF/layouts/header.jsp"/>
+        <put-attribute name="menu" value="/WEB-INF/layouts/menu.jsp"/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/layouts/footer.jsp"/>
+    </definition>
+    <definition name="login" extends="base.definition">
+        <put-attribute name="title" value="Project Name - Sign In"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/user-login.jsp"/>
+    </definition>
+    <definition name="profile" extends="base.definition">
+        <put-attribute name="title" expression="${user.firstName}"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/user-profile.jsp"/>
+    </definition>
+    <definition name="submit.order" extends="base.definition">
+        <put-attribute name="title" value="Send order id ${order.id}"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/user-profile.jsp"/>
+    </definition>
+    <definition name="order.list" extends="base.definition">
+        <put-attribute name="title" value="Orders list"/>
+        <put-attribute name="body" value="/WEB-INF/views/order/orders-list.jsp"/>
+    </definition>
+    <definition name="users.list" extends="base.definition">
+        <put-attribute name="title" value="User List"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/users-list.jsp"/>
+    </definition>
+    <definition name="registration" extends="base.definition">
+        <put-attribute name="title" value="Register"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/user-registration.jsp"/>
+    </definition>
+    <definition name="hotels.list" extends="base.definition">
+        <put-attribute name="tile" value="Hotels"/>
+        <put-attribute name="body" value="/WEB-INF/views/hotels/hotels-list.jsp"/>
+    </definition>
+    <definition name="hotel" extends="base.definition">
+        <put-attribute name="tile" value="Hotels"/>
+        <put-attribute name="body" value="/WEB-INF/views/hotels/hotel-info.jsp"/>
+    </definition>
+    <definition name="search.hotel" extends="base.definition">
+        <put-attribute name="title" value="Search"/>
+        <put-attribute name="body" value="/WEB-INF/views/hotels/search-hotel.jsp"/>
+    </definition>
+    <definition name="confirm.order" extends="base.definition">
+        <put-attribute name="title" value="Confirm Order"/>
+        <put-attribute name="body" value="/WEB-INF/views/order/confirm-send-oder.jsp"/>
+    </definition>
+    <definition name="orders.administrator.list" extends="base.definition">
+        <put-attribute name="title" value="Administrate Orders"/>
+        <put-attribute name="body" value="/WEB-INF/views/order/orders-administrator-list.jsp"/>
+    </definition>
+    <definition name="order.info" extends="base.definition">
+        <put-attribute name="title" value="Order info"/>
+        <put-attribute name="body" value="/WEB-INF/views/order/order-info.jsp"/>
+    </definition>
+    <definition name="order.administrator.info" extends="base.definition">
+        <put-attribute name="title" value="Order info"/>
+        <put-attribute name="body" value="/WEB-INF/views/order/order-administrator-info.jsp"/>
+    </definition>
+    <definition name="hotel.edit" extends="base.definition">
+        <put-attribute name="title" value="Edit hotel"/>
+        <put-attribute name="body" value="/WEB-INF/views/hotels/hotel-edit.jsp"/>
+    </definition>
+    <definition name="hotel.list" extends="base.definition">
+        <put-attribute name="title" value="Edit hotel"/>
+        <put-attribute name="body" value="/WEB-INF/views/hotels/hotels-list.jsp"/>
+    </definition>
+    <definition name="hotel.address.edit" extends="base.definition">
+        <put-attribute name="title" value="Edit hotel address"/>
+        <put-attribute name="body" value="/WEB-INF/views/hotels/hotel-address-edit.jsp"/>
+    </definition>
+    <definition name="hotel.address.edit.a" extends="base.definition">
+        <put-attribute name="title" value="Edit hotel address"/>
+        <put-attribute name="body" value="/WEB-INF/views/hotels/hotel-address-edit-a.jsp"/>
+    </definition>
+    <!--ERROR-->
+    <definition name="error" template="/WEB-INF/views/error/error.jsp">
+    </definition>
+</tiles-definitions>

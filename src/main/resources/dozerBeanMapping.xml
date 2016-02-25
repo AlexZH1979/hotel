@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+    <configuration>
+        <custom-converters>
+            <converter type="ru.yandex.zhmyd.hotel.service.util.converter.UserEntityToIntegerConverter">
+                <class-a>ru.yandex.zhmyd.hotel.repository.entity.UserEntity</class-a>
+                <class-b>java.lang.Integer</class-b>
+            </converter>
+            <converter type="ru.yandex.zhmyd.hotel.service.util.converter.RoomEntityToIntegerConverter">
+                <class-a>ru.yandex.zhmyd.hotel.repository.entity.RoomEntity</class-a>
+                <class-b>java.lang.Integer</class-b>
+            </converter>
+            <converter type="ru.yandex.zhmyd.hotel.service.util.converter.AddressCountyToStringConverter">
+                <class-a>ru.yandex.zhmyd.hotel.repository.entity.HotelAddressCountyEntity</class-a>
+                <class-b>java.lang.String</class-b>
+            </converter>
+            <converter type="ru.yandex.zhmyd.hotel.service.util.converter.AddressCityToStringConverter">
+                <class-a>ru.yandex.zhmyd.hotel.repository.entity.HotelAddressCityEntity</class-a>
+                <class-b>java.lang.String</class-b>
+            </converter>
+            <converter type="ru.yandex.zhmyd.hotel.service.util.converter.AddressStateToStringConverter">
+                <class-a>ru.yandex.zhmyd.hotel.repository.entity.HotelAddressStateEntity</class-a>
+                <class-b>java.lang.String</class-b>
+            </converter>
+            <converter type="ru.yandex.zhmyd.hotel.service.util.converter.HotelEntityToIntegerConverter">
+                <class-a>ru.yandex.zhmyd.hotel.repository.entity.HotelEntity</class-a>
+                <class-b>java.lang.Integer</class-b>
+            </converter>
+        </custom-converters>
+    </configuration>
+    <mapping>
+        <class-a>ru.yandex.zhmyd.hotel.repository.entity.OrderEntity</class-a>
+        <class-b>ru.yandex.zhmyd.hotel.model.Order</class-b>
+        <field custom-converter-param="customer">
+            <a>customer</a>
+            <b>customerId</b>
+        </field>
+        <field custom-converter-param="room">
+            <a>room</a>
+            <b>roomId</b>
+        </field>
+        <field custom-converter-param="hotel">
+            <a>hotel</a>
+            <b>hotelId</b>
+        </field>
+    </mapping>
+</mappings>
