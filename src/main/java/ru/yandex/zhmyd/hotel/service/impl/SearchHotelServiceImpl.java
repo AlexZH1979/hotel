@@ -35,7 +35,7 @@ public class SearchHotelServiceImpl implements SearchHotelService {
             case Associations.COUNTY:
                 return Util.map(mapper, hotelDao.searchLikeAddressAssociation(association, name, begin, count), Hotel.class);
             default:
-                return null;
+                throw new IllegalArgumentException();
         }
     }
 
@@ -67,11 +67,6 @@ public class SearchHotelServiceImpl implements SearchHotelService {
         }
     }
 
-    /*
-     *
-     * private method
-     *
-     */
     private Criterion getCriterionForLikeName(String name){
         return Restrictions.or(Restrictions.like(NAME, "% " + name + "%"),
                 Restrictions.like(NAME, name + "%"));

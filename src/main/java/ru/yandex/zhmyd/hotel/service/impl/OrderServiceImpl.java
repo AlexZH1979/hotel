@@ -36,6 +36,8 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderEntity, Or
     //24*60*60*1000
     private static final int MILISECONDS_IN_DAY = 86400000;
 
+    private static final long serialVersionUID = 6526282443261564971L;
+
     @Autowired
     private UserDao userDao;
 

@@ -19,6 +19,7 @@ import java.util.List;
 @Service
 public class RoomServiceImpl extends AbstractServiceImpl<Room, RoomEntity, RoomDao, Integer> implements RoomService{
 
+    private static final long serialVersionUID = -18755606649264967L;
 
     @Autowired
     private RoomDao roomDao;

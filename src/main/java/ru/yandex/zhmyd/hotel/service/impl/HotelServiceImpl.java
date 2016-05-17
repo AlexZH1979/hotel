@@ -16,6 +16,8 @@ import java.util.List;
 @Service
 public class HotelServiceImpl extends AbstractServiceImpl<Hotel, HotelEntity, HotelDao,Integer> implements HotelService{
 
+    private static final long serialVersionUID = 5896415989140977871L;
+
     @Autowired
     private HotelDao hotelDao;
 

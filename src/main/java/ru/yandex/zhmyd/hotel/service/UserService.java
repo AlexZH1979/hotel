@@ -9,8 +9,8 @@ import javax.transaction.Transactional;
 @Transactional
 public interface UserService extends BasicService<User, Integer>,SearchParameter {
 
-    public User getUserByCredits(String login, String password);
-    public User getUserByPrincipal(ApplicationUserDetails details);
+    User getUserByCredits(String login, String password);
+    User getUserByPrincipal(ApplicationUserDetails details);
 
     void registrationCustomer(User customer);
 }

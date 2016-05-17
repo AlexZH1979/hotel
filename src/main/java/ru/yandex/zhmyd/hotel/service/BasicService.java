@@ -8,16 +8,16 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public interface BasicService<T, ID extends Serializable> {
+public interface BasicService<T, ID extends Serializable> extends Serializable {
 
     /**
      * <b>WARNING</b> this method may shows bad performance for big collections returning from db
      *
      * @return List of all values type T
      */
-    public List<T> getAll();
+    List<T> getAll();
 
-    public Long getSizeList();
+    Long getSizeList();
     /**
      * Return subsequence of present values
      *
@@ -28,21 +28,21 @@ public interface BasicService<T, ID extends Serializable> {
      * if begin beyond the available values or count contains incorrect value
      * this method return null
      */
-    public List<T> getInterval(Integer begin, Integer count);
-    public List<T> getInterval(Map param, Integer begin, Integer count);
+    List<T> getInterval(Integer begin, Integer count);
+    List<T> getInterval(Map param, Integer begin, Integer count);
     /**
      * @param Id object id
      * @return Object or null if object doesn't exist
      */
-    public T getById(ID Id);
+    T getById(ID Id);
 
-    public void save(T obj);
+    void save(T obj);
 
     @SuppressWarnings("unchecked")
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.SERIALIZABLE)
     void update(T dto);
 
-    public void delete(T obj);
+    void delete(T obj);
 
-    public void delete(ID id);
+    void delete(ID id);
 }

@@ -17,10 +17,6 @@ import ru.yandex.zhmyd.hotel.security.ApplicationUserDetails;
 import ru.yandex.zhmyd.hotel.service.UserService;
 import ru.yandex.zhmyd.hotel.service.exceptions.ServiceException;
 
-/*
-* @Transactional
-* interface UserService
- */
 @Service
 public class UserServiceImpl extends AbstractServiceImpl<User, UserEntity, UserDao, Integer> implements UserService {
 
@@ -40,7 +36,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserEntity, UserD
             LOG.debug("FIND: " + userEntity);
             user = mapper.map(userEntity, User.class);
         } else {
-            LOG.warn("NO FOUND USER BY CREDENTIALS: login=" + login + ", password=" + password);
+            LOG.warn(String.format("NO FOUND USER BY CREDENTIALS: login=%s, password=%s", login, password));
         }
         LOG.debug("SEND from ru.yandex.zhmyd.hotel.ru.yandex.zhmyd.hotel.service getUser: " + user);
         return user;
@@ -71,7 +67,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserEntity, UserD
         if (userDao.getByCriteria(cr).isEmpty()) {
             super.save(user);
         } else {
-            throw new ServiceException("user with login: "+user.getLogin()+", or email: "+user.getEmail()+" already exist");
+            throw new ServiceException(String.format("user with login: %s, or email: %s already exist", user.getLogin(), user.getEmail()));
         }
 
     }

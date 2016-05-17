@@ -23,7 +23,10 @@ import static ru.yandex.zhmyd.hotel.repository.dao.util.SearchParameter.Associat
 @Service
 public class AddressServiceImpl extends AbstractServiceImpl<HotelAddress, HotelAddressEntity, HotelAddressDao, Integer> implements AddressService {
 
+
     private static final Logger LOG = Logger.getLogger(AddressServiceImpl.class);
+
+    private static final long serialVersionUID = 6034843805271204197L;
 
     @Autowired
     private HotelAddressDao addressDao;
@@ -45,7 +48,7 @@ public class AddressServiceImpl extends AbstractServiceImpl<HotelAddress, HotelA
     // ""->"state"->"county"->"city"->"zip"
     @Transactional(readOnly = true)
     @Override
-    public List<String> getNameSubParameters(String param, String value){
+    public List<String> getNameSubParameters(String param, String value) {
         return addressDao.getNameSubParameters(param, value);
     }
 
@@ -74,13 +77,13 @@ public class AddressServiceImpl extends AbstractServiceImpl<HotelAddress, HotelA
         if (!getCounties(state).contains(county)) {
             throw new IllegalArgumentException("Not valid county for build address");
         }
-        if(!getNameSubParameters(COUNTY, county).contains(city) ){
+        if (!getNameSubParameters(COUNTY, county).contains(city)) {
             throw new IllegalArgumentException("Not valid city for build address");
         }
-        if(!getNameSubParameters(CITY, city).contains(Integer.valueOf(zip)) ||
-                address == null){
+        if (!getNameSubParameters(CITY, city).contains(Integer.valueOf(zip)) ||
+                address == null) {
             throw new IllegalArgumentException("Not valid zip for build address");
-        }else{
+        } else {
             HotelAddressEntity hotelAddress = addressDao.getById(hotelId);
             hotelAddress.setState((HotelAddressStateEntity) addressDao.getSubParameters(STATE, state));
             hotelAddress.setCounty((HotelAddressCountyEntity) addressDao.getSubParameters(COUNTY, county));
